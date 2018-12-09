@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomVisionApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        x:Name="TheWindow"
+        Title="Azure Vision" 
+        Height="470.455" 
+        Width="648.206">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="120" />
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="1" BorderBrush="Black">
+            <Image x:Name="TheImage" />
+        </Border>
+        <StackPanel Grid.Column="1" Margin="6,0,6,0">
+            <Label FontWeight="Bold">Service</Label>
+            <RadioButton GroupName="ServiceType" Content="Vision" Margin="3, 0, 0, 0" />
+            <RadioButton GroupName="ServiceType" Content="Custom Vision" Margin="3, 0, 0, 0" />
+
+            <Button x:Name="bStart" Content="Start" Margin="5, 20, 0, 0" Click="BStart_Click" />
+            <Button x:Name="bLoad" Content="Load" Margin="5, 6, 0, 0" Click="BLoad_Click" />
+
+            <Button x:Name="bDescribe" Content="Go!" Margin="5, 20, 0, 0" Height="80" Click="BDescribe_Click" />
+
+        </StackPanel>
+        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1">
+            <Grid Margin="10" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Ready" FontWeight="Bold" FontSize="16" />
+                <TextBlock x:Name="Description" Text="" Grid.Row="1" FontSize="24" />
+            </Grid>
+        </Border>
     </Grid>
 </Window>
