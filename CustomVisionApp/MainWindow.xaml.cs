@@ -2,13 +2,9 @@
 using Microsoft.Win32;
 using OpenCvSharp;
 using System;
-using System.Drawing;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace CustomVisionApp {
@@ -21,8 +17,11 @@ namespace CustomVisionApp {
 
         public MainWindow() {
             InitializeComponent();
-            var token = Environment.GetEnvironmentVariable("AZURE-COGNITIVESERVICES-TOKEN", EnvironmentVariableTarget.Machine);
-            _visionClient = new VisionClient(token, "https://brazilsouth.api.cognitive.microsoft.com");
+            var url = "https://brazilsouth.api.cognitive.microsoft.com";
+            var token = Environment.GetEnvironmentVariable("AZURE-COGNITIVESERVICES-TOKEN", EnvironmentVariableTarget.User);
+            var predictionToken = Environment.GetEnvironmentVariable("AZURE-CUSTOMVISION-PREDICTION-TOKEN", EnvironmentVariableTarget.User);
+            _visionClient = new VisionClient(token, url);
+            _customVisionClient = new CustomVisionClient(predictionToken);
         }
 
         private void BStart_Click(object sender, RoutedEventArgs e) {
@@ -58,7 +57,17 @@ namespace CustomVisionApp {
                 return;
             }
             var image = ToImage(_currentImage);
-            var description = await _visionClient.Analyze(image);
+
+            string description;
+            if(ServiceGeneric.IsChecked ?? false) {
+                description = await _visionClient.Analyze(image);
+            }
+            else if(ServiceCustom.IsChecked ?? false) {
+                description = await _customVisionClient.Analyze(image, editProjectId.Text);
+            }
+            else {
+                description = "";
+            }
             Description.Text = description;
         }
 

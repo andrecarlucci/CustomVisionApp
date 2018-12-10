@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         x:Name="TheWindow"
         Title="Azure Vision" 
-        Height="470.455" 
-        Width="648.206">
+        Height="480" 
+        Width="650">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -23,17 +23,19 @@
         </Border>
         <StackPanel Grid.Column="1" Margin="6,0,6,0">
             <Label FontWeight="Bold">Vision Service</Label>
-            <RadioButton IsChecked="True" GroupName="ServiceType" Content="Generic" Margin="3, 0, 0, 0" />
-            <RadioButton GroupName="ServiceType" Content="Custom" Margin="3, 0, 0, 0" />
-            <RadioButton GroupName="ServiceType" Content="Local Custom" Margin="3, 0, 0, 0" />
+            <RadioButton GroupName="ServiceType" x:Name="ServiceGeneric" IsChecked="True" Content="Generic" Margin="3, 0, 0, 0" />
+            <RadioButton GroupName="ServiceType" x:Name="ServiceCustom" Content="Custom" Margin="3, 0, 0, 0" />
+            <RadioButton GroupName="ServiceType" x:Name="ServiceLocal" Content="Local Custom" Margin="3, 0, 0, 0" />
 
             <Button x:Name="bStart" Content="Start" Margin="5, 20, 0, 0" Click="BStart_Click" />
             <Button x:Name="bLoad" Content="Load" Margin="5, 6, 0, 0" Click="BLoad_Click" />
 
             <Button x:Name="bDescribe" Content="Go!" Margin="5, 20, 0, 0" Height="80" Click="BDescribe_Click" />
 
+            <Label FontWeight="Bold" Margin="0,42,0,0">C.V. ProjectId</Label>
+            <TextBox x:Name="editProjectId" Margin="5,0,0,0" Text="70bc8939-75f0-417c-ba86-06fdf03b46df" />
         </StackPanel>
-        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1">
+        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.RowSpan="1">
             <Grid Margin="10" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />

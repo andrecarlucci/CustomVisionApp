@@ -127,6 +127,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Assets\70bc8939-75f0-417c-ba86-06fdf03b46df\model.pb" />
+    <None Include="Assets\a71c971b-c791-479b-b8ad-54e431197bad\model.pb" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -135,6 +137,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\a71c971b-c791-479b-b8ad-54e431197bad\labels.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\70bc8939-75f0-417c-ba86-06fdf03b46df\labels.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
