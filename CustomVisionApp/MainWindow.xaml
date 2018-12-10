@@ -29,13 +29,11 @@
 
             <Button x:Name="bStart" Content="Start" Margin="5, 20, 0, 0" Click="BStart_Click" />
             <Button x:Name="bLoad" Content="Load" Margin="5, 6, 0, 0" Click="BLoad_Click" />
+            <Button x:Name="bSave" Content="Save Image" Margin="5, 6, 0, 0" Click="BSave_Click"/>
 
             <Button x:Name="bDescribe" Content="Go!" Margin="5, 20, 0, 0" Height="80" Click="BDescribe_Click" />
-
-            <Label FontWeight="Bold" Margin="0,42,0,0">C.V. ProjectId</Label>
-            <TextBox x:Name="editProjectId" Margin="5,0,0,0" Text="70bc8939-75f0-417c-ba86-06fdf03b46df" />
         </StackPanel>
-        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1" Grid.RowSpan="1">
+        <Border BorderThickness="1" BorderBrush="Black" Grid.Row="1">
             <Grid Margin="10" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />
@@ -47,5 +45,10 @@
                 </ScrollViewer>
             </Grid>
         </Border>
+        <StackPanel Grid.Row="1" Grid.Column="1"  Margin="6,0,6,0">
+            <Label FontWeight="Bold">Vision Project</Label>
+            <RadioButton GroupName="Project" x:Name="Bolacha" IsChecked="True" Content="Bolacha" Margin="3, 0, 0, 0" Checked="Bolacha_Checked" />
+            <RadioButton GroupName="Project" x:Name="Hadouken" Content="Hadouken" Margin="3, 0, 0, 0" Checked="Hadouken_Checked" />
+        </StackPanel>
     </Grid>
 </Window>

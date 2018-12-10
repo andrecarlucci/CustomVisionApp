@@ -21,8 +21,4 @@ namespace CustomVisionApp.Models {
             return prediction.Predictions.FirstOrDefault().TagName ?? "None";
         }
     }
-
-    public class LocalCustomVisionClient {
-
-    }
 }
