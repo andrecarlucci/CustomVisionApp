@@ -12,7 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="120" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -22,9 +22,10 @@
             <Image x:Name="TheImage" />
         </Border>
         <StackPanel Grid.Column="1" Margin="6,0,6,0">
-            <Label FontWeight="Bold">Service</Label>
-            <RadioButton GroupName="ServiceType" Content="Vision" Margin="3, 0, 0, 0" />
-            <RadioButton GroupName="ServiceType" Content="Custom Vision" Margin="3, 0, 0, 0" />
+            <Label FontWeight="Bold">Vision Service</Label>
+            <RadioButton IsChecked="True" GroupName="ServiceType" Content="Generic" Margin="3, 0, 0, 0" />
+            <RadioButton GroupName="ServiceType" Content="Custom" Margin="3, 0, 0, 0" />
+            <RadioButton GroupName="ServiceType" Content="Local Custom" Margin="3, 0, 0, 0" />
 
             <Button x:Name="bStart" Content="Start" Margin="5, 20, 0, 0" Click="BStart_Click" />
             <Button x:Name="bLoad" Content="Load" Margin="5, 6, 0, 0" Click="BLoad_Click" />
@@ -38,8 +39,10 @@
                     <RowDefinition Height="20" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Ready" FontWeight="Bold" FontSize="16" />
-                <TextBlock x:Name="Description" Text="" Grid.Row="1" FontSize="24" />
+                <TextBlock Text="Description" FontWeight="Bold" FontSize="14" />
+                <ScrollViewer Grid.Row="1">
+                    <TextBlock x:Name="Description" Text=""  FontSize="14" TextWrapping="Wrap" />
+                </ScrollViewer>
             </Grid>
         </Border>
     </Grid>
