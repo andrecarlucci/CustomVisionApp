@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using TensorFlow;
 
-namespace CustomVisionApp.TensorFlow {
+namespace CustomVisionApp.TensorFlow
+{
     // Taken and adapted from: https://github.com/migueldeicaza/TensorFlowSharp/blob/master/Examples/ExampleCommon/ImageUtil.cs
     public static class ImageUtil {
 
@@ -33,14 +34,15 @@ namespace CustomVisionApp.TensorFlow {
         // C++: https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/label_image/main.cc
         // Java: https://github.com/Azure-Samples/cognitive-services-android-customvision-sample/blob/master/app/src/main/java/demo/tensorflow/org/customvision_sample/MSCognitiveServicesClassifier.java
         private static TFGraph ConstructGraphToNormalizeImage(out TFOutput input, out TFOutput output, TFDataType destinationDataType = TFDataType.Float) {
-            const int W = 227;
-            const int H = 227;
+            const int Size = 218;
+            const int W = Size;
+            const int H = Size;
             const float Scale = 1;
 
             // Depending on your CustomVision.ai Domain - set appropriate Mean Values (RGB)
             // https://github.com/Azure-Samples/cognitive-services-android-customvision-sample for RGB values (in BGR order)
-            var bgrValues = new TFTensor(new float[] { 104.0f, 117.0f, 123.0f }); // General (Compact) & Landmark (Compact)
-            //var bgrValues = new TFTensor(0f); // Retail (Compact)
+            //var bgrValues = new TFTensor(new float[] { 104.0f, 117.0f, 123.0f }); // General (Compact) & Landmark (Compact)
+            var bgrValues = new TFTensor(0f); // Retail (Compact)
 
             var graph = new TFGraph();
             input = graph.Placeholder(TFDataType.String);

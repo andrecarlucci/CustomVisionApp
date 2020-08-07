@@ -16,7 +16,7 @@ namespace CustomVisionApp.Models {
 
         public async Task<string> Analyze(byte[] image) {
             var imageStream = new MemoryStream(image);
-            var description = await _client.DescribeImageInStreamAsync(imageStream, 1, "pt");
+            var description = await _client.DescribeImageInStreamAsync(imageStream, 1, "en");
 
             var captions = String.Join(" - ", description.Captions.Select(c => c.Text));
             var tags = String.Join(" - ", description.Tags);

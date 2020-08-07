@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using TensorFlow;
 
@@ -31,13 +32,23 @@ namespace CustomVisionApp.TensorFlow {
             _graph.Dispose();
         }
 
-        public Result Run(byte[] image) {
+        public TensorResult Run(byte[] image) {
             var result = new Result();
+            var sw = new Stopwatch();
+
+            var res = new TensorResult();
             using (var session = new TFSession(_graph)) {
+                sw.Start();
                 var tensor = ImageUtil.CreateTensorFromImage(image);
+                res.TimeToCreateImage = sw.Elapsed;
+
                 var runner = session.GetRunner();
                 runner.AddInput(_graph["Placeholder"][0], tensor).Fetch(_graph["loss"][0]);
+
+                sw.Restart();
                 var output = runner.Run();
+                res.TimeToRecognize = sw.Elapsed;
+
                 var allResults = output[0];
                 var probabilities = ((float[][])allResults.GetValue(jagged: true))[0];
                 for (var i = 0; i < probabilities.Length; i++) {
@@ -47,7 +58,15 @@ namespace CustomVisionApp.TensorFlow {
                     }
                 }
             }
-            return result;
+            res.Result = result;
+            return res;
         }
+    }
+
+    public class TensorResult
+    {
+        public Result Result { get; set; }
+        public TimeSpan TimeToCreateImage { get; set; }
+        public TimeSpan TimeToRecognize { get; set; }
     }
 }

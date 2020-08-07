@@ -14,7 +14,8 @@ namespace CustomVisionApp {
     public partial class MainWindow : System.Windows.Window {
 
         private const string _projectIdBolacha = "70bc8939-75f0-417c-ba86-06fdf03b46df";
-        private const string _projectIdHadouken = "a71c971b-c791-479b-b8ad-54e431197bad";
+        //private const string _projectIdHadouken = "6acc0bbf-dc5a-4763-a896-d4639820e114";
+        private const string _projectIdHadouken = "a71c971b-c791-479b-b8ad-54e431197";
 
         private MyCamera _camera;
         private VisionClient _visionClient;
@@ -28,7 +29,10 @@ namespace CustomVisionApp {
             var url = "https://brazilsouth.api.cognitive.microsoft.com";
             var token = Environment.GetEnvironmentVariable("AZURE-COGNITIVESERVICES-TOKEN", EnvironmentVariableTarget.User);
             var predictionToken = Environment.GetEnvironmentVariable("AZURE-CUSTOMVISION-PREDICTION-TOKEN", EnvironmentVariableTarget.User);
-            
+
+            token = "bf5c88d9a9a84747a2d4bd0170bb4f7c";
+            predictionToken = "7222807f92cc4776aa6da5c888ec06f5";
+
             _visionClient = new VisionClient(token, url);
             _customVisionClient = new CustomVisionClient(predictionToken);
             _localCustomVisionClient = new LocalCustomVisionClient();
@@ -78,7 +82,8 @@ namespace CustomVisionApp {
                 description = await _customVisionClient.Analyze(image, _currentProjectId);
             }
             else if(ServiceLocal.IsChecked ?? false) {
-                description = await _localCustomVisionClient.Analyze(image, _currentProjectId);
+                var tensorResult = await _localCustomVisionClient.Analyze(image, _currentProjectId);
+                description = tensorResult.Result.Label;
             }
             Description.Text = description;
         }
@@ -90,10 +95,13 @@ namespace CustomVisionApp {
                 TheImage.Source = _currentImage;
                 TheWindow.Title = "Azure Vision: " + _camera.FramesPerSecond.ToString();                
             });
-
             var result = _localCustomVisionClient.Analyze(bytes, _currentProjectId).Result;
+            Debug.WriteLine($"Times: Create: {result.TimeToCreateImage} Recognize: {result.TimeToRecognize}");
 
-            //SpecialAtacks.Execute(result);
+            ChangeUI(() => {
+                TheWindow.Title = TheWindow.Title + " Result: " + result.Result.Label;
+            });
+            SpecialAtacks.Execute(result.Result.Label);
         }
 
         private void ChangeUI(Action action) {
